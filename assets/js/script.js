@@ -46,7 +46,13 @@ function timeblockCreation() {
 }
 
 function loadEntries() {
-
+    var storedEvents = JSON.parse(localStorage.getItem('savedEvents'));
+    if (storedEvents !== null) {
+        savedEvents = storedEvents;
+        for (let i = 0; i < savedEvents.length; i++) {
+            container.children('.row').eq(i).children('textarea').text(savedEvents[i]);
+        }
+    }
 }
 
 function saveEntry() {
@@ -55,8 +61,8 @@ function saveEntry() {
     //grab value of textarea
     let eventDetail = $(this).parent().children('textarea');
     eventDetail = eventDetail.val();
-    savedEvents[arrIndexJSON] = eventDetail;
-    localStorage.setItem("savedEvents", savedEvents);
+    savedEvents[arrIndexJSON - 1] = eventDetail;
+    localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
     $('.toast').toast('show');
 }
 
@@ -64,6 +70,7 @@ function saveEntry() {
 //set day
 $('#currentDay').text(currentDayDate);
 timeblockCreation();
+loadEntries();
 container.on("click", '.saveBtn', saveEntry);
 
 //on initialize, check if date is correct
