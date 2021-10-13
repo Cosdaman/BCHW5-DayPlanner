@@ -9,7 +9,6 @@ var container = $('.container');
 //var creation
 var savedEvents = Array(9)
 
-
 function timeblockCreation() {
     //timeblock creation loop
     for (let i = 9; i < 18; i++) {
@@ -46,17 +45,22 @@ function timeblockCreation() {
     }
 }
 
+function loadEntries() {
+
+}
+
 function saveEntry() {
-    //index is determined by data hour
-    let arrLength = $('.container').children().length;
-    let index = $(this).parent().attr('data-hour') - arrLength;
+    //index is determined by data hour, since the 
+    var arrIndexJSON = ($('.container').children()).index($(this).parent())
     //grab value of textarea
     let eventDetail = $(this).parent().children('textarea');
     eventDetail = eventDetail.val();
-    savedEvents[index] = eventDetail;
-    localStorage.setItem("savedEvents",savedEvents);
-
+    savedEvents[arrIndexJSON] = eventDetail;
+    localStorage.setItem("savedEvents", savedEvents);
+    $('.toast').toast('show');
 }
+
+
 //set day
 $('#currentDay').text(currentDayDate);
 timeblockCreation();
