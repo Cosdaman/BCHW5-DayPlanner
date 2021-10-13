@@ -6,13 +6,11 @@ let currHour = moment().startOf('hour')
 //dom selection
 var container = $('.container');
 
+//var creation
+var savedEvents = Array(9)
 
-$('#currentDay').text(currentDayDate);
 
-
-//initial 
-function initialize() {
-
+function timeblockCreation() {
     //timeblock creation loop
     for (let i = 9; i < 18; i++) {
         //dom creation and manipulation
@@ -29,18 +27,13 @@ function initialize() {
         divElText.addClass('col-9 description')
         divElSave.addClass('col-1 saveBtn');
 
-
         //div formatting for past present future
         if (currHour.isAfter(timeblockHour)) {
-            console.log('past')
             divElRow.addClass('past')
-            divElText.prop('readonly',true);
+            //divElText.prop('readonly', true);
         } else if (currHour.isSame(timeblockHour)) {
-            console.log('present')
             divElRow.addClass('present')
-            divElText.prop('readonly',true);
         } else {
-            console.log('future')
             divElRow.addClass('future')
         }
 
@@ -53,11 +46,22 @@ function initialize() {
     }
 }
 
-initialize();
+function saveEntry() {
+    //index is determined by data hour
+    let arrLength = $('.container').children().length;
+    let index = $(this).parent().attr('data-hour') - arrLength;
+    //grab value of textarea
+    let eventDetail = $(this).parent().children('textarea');
+    eventDetail = eventDetail.val();
+    savedEvents[index] = eventDetail;
+    localStorage.setItem("savedEvents",savedEvents);
 
+}
+//set day
+$('#currentDay').text(currentDayDate);
+timeblockCreation();
+container.on("click", '.saveBtn', saveEntry);
 
-//onclick on savebutton
-//save pressed, load into json
 //on initialize, check if date is correct
 
 //add json parse on the initialize

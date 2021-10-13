@@ -76,8 +76,6 @@ textarea {
   transition: all 0.3s ease-in-out;
 }
 
-/* .saveBtn img{
-  padding: 5px;
-  width: 100%;
-  height: auto;
-} */
+.container{
+  margin-bottom: 20px;
+}
