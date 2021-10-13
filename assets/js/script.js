@@ -29,7 +29,7 @@ function timeblockCreation() {
         //div formatting for past present future
         if (currHour.isAfter(timeblockHour)) {
             divElRow.addClass('past')
-            //divElText.prop('readonly', true);
+            divElText.prop('readonly', true);
         } else if (currHour.isSame(timeblockHour)) {
             divElRow.addClass('present')
         } else {
