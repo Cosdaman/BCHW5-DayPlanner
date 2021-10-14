@@ -1,6 +1,8 @@
 # BCHW5-DayPlanner  
 
 Description:  
+This application's goal is to showcase the developer's recently acquired skills in Bootstrap, JQUERY, and 3rd party APIs.  
+Moment.js is one such API that is used in this application. This application utilizes features like Toast, and Bootstraps' grid system.
 
 
 
